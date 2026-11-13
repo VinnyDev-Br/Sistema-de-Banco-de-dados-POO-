@@ -27,6 +27,7 @@ public class TelaPrincipal extends JFrame {
     private final JTable tabela = new JTable(modelo);
 
     private final JTextField busca = new JTextField(18);
+    private final JComboBox<String> filtroTurma = new JComboBox<>();
     private final JComboBox<String> filtroTipo = new JComboBox<>(TIPOS_ROTULO);
     private final JComboBox<String> filtroSetor = new JComboBox<>();
     private final JComboBox<Object> filtroSituacao = new JComboBox<>();
@@ -69,12 +70,13 @@ public class TelaPrincipal extends JFrame {
         p.add(new JLabel("Buscar (nome ou NIP):")); p.add(busca);
         p.add(new JLabel("Tipo:")); p.add(filtroTipo);
         p.add(new JLabel("Setor:")); p.add(filtroSetor);
+        p.add(new JLabel("Turma:")); p.add(filtroTurma);  
         p.add(new JLabel("Situação:")); p.add(filtroSituacao);
         JButton limpar = new JButton("Limpar filtros");
         limpar.addActionListener(e -> {
             atualizandoFiltros = true;
             busca.setText(""); filtroTipo.setSelectedIndex(0);
-            filtroSetor.setSelectedIndex(0); filtroSituacao.setSelectedIndex(0);
+            filtroSetor.setSelectedIndex(0); filtroTurma.setSelectedIndex(0); filtroSituacao.setSelectedIndex(0);
             atualizandoFiltros = false;
             atualizarTabela();
         });
@@ -88,6 +90,7 @@ public class TelaPrincipal extends JFrame {
         filtroTipo.addActionListener(e -> atualizarTabela());
         filtroSetor.addActionListener(e -> atualizarTabela());
         filtroSituacao.addActionListener(e -> atualizarTabela());
+        filtroTurma.addActionListener(e -> atualizarTabela());
         return p;
     }
 
@@ -171,11 +174,12 @@ public class TelaPrincipal extends JFrame {
     private void atualizarTabela() {
         if (atualizandoFiltros) return;
         String setor = filtroSetor.getSelectedIndex() <= 0 ? null : (String) filtroSetor.getSelectedItem();
+        String turma = filtroTurma.getSelectedIndex() <= 0 ? null : (String) filtroTurma.getSelectedItem();   // <- novo
         Object sit = filtroSituacao.getSelectedItem();
         Situacao situacao = sit instanceof Situacao ? (Situacao) sit : null;
         int selecionado = pessoaSelecionada() == null ? -1 : pessoaSelecionada().getNip();
 
-        modelo.setDados(servico.filtrar(TIPOS_CHAVE[filtroTipo.getSelectedIndex()], setor, situacao, busca.getText()));
+        modelo.setDados(servico.filtrar(TIPOS_CHAVE[filtroTipo.getSelectedIndex()], setor, turma, situacao, busca.getText()));   // <- mudou
 
         for (int i = 0; i < tabela.getRowCount(); i++) {              // mantém a seleção após atualizar
             if ((Integer) tabela.getValueAt(i, 0) == selecionado) { tabela.setRowSelectionInterval(i, i); break; }
@@ -196,7 +200,18 @@ public class TelaPrincipal extends JFrame {
         atualizandoFiltros = false;
     }
 
-    private void depoisDeAlterar() { recarregarSetores(); atualizarTabela(); }
+    private void recarregarTurmas() {
+        atualizandoFiltros = true;
+        Object anterior = filtroTurma.getSelectedItem();
+        filtroTurma.removeAllItems();
+        filtroTurma.addItem(TODOS);
+        for (String t : servico.turmas()) filtroTurma.addItem(t);
+        if (anterior != null) filtroTurma.setSelectedItem(anterior);
+        if (filtroTurma.getSelectedIndex() < 0) filtroTurma.setSelectedIndex(0);
+        atualizandoFiltros = false;
+}
+
+    private void depoisDeAlterar() { recarregarSetores(); recarregarTurmas(); atualizarTabela(); }
 
     private Pessoa pessoaSelecionada() {
         int linha = tabela.getSelectedRow();

@@ -217,4 +217,14 @@ public class SistemaService {
     }
 
     public void registrarSaida() { log.registrar(usuario.getLogin(), "SAIDA", "Sistema encerrado"); }
+    
+    /** Turmas distintas dos alunos, em ordem alfabética (Alfa, Bravo, Charlie...). */
+    public List<String> turmas() {
+        return repo.listarTodos().stream()
+                .filter(p -> p instanceof Aluno)
+                .map(p -> ((Aluno) p).getTurma())
+                .distinct()
+                .sorted(Comparator.comparing(Texto::normalizar))
+                .collect(Collectors.toList());
+    }
 }

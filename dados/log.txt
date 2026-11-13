@@ -1,0 +1,3 @@
+2026-11-12 17:30:47 | admin | LOGIN | Perfil ADMIN, 14 registros
+2026-11-12 17:31:08 | admin | BACKUP | 20261112_173108
+2026-11-12 17:31:08 | admin | SAIDA | Sistema encerrado
