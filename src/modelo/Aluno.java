@@ -31,11 +31,11 @@ public class Aluno extends Pessoa {
     }
     
     public String getTurma() { return turma; }
-    public void setTurma(String turma) throws DadoInvalidoException { this.turma = exigirTexto(turma, "Turma", 30); }
 
-    public String getPelotao() { return pelotao; }
-    public void setPelotao(String pelotao) throws DadoInvalidoException { this.pelotao = exigirTexto(pelotao, "Pelotão", 30); }
-
+    public String getPelotao() { return pelotao; }public void setPelotao(String pelotao) throws DadoInvalidoException { this.pelotao = exigirTexto(pelotao, "Pelotão", 30); }
+    public void setTurma(String turma) throws DadoInvalidoException {
+        this.turma = exigirTexto(turma, "Turma", 30).toUpperCase().replaceAll("\\s+", " ");
+    }
     public int getIdade() { return idade; }
     public void setIdade(int idade) throws DadoInvalidoException {
         if (idade < 12 || idade > 99) throw new DadoInvalidoException("A idade deve estar entre 12 e 99 anos.");
@@ -56,9 +56,7 @@ public class Aluno extends Pessoa {
         this.numeroParentesco = n;
     }
 
-    public void setTurma(String turma) throws DadoInvalidoException {
-        this.turma = exigirTexto(turma, "Turma", 30).toUpperCase().replaceAll("\\s+", " ");
-    }
+
     @Override public String getTipo() { return "ALUNO"; }
 
     @Override public String getDescricao() {

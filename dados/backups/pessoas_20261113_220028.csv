@@ -1,0 +1,16 @@
+# TIPO;NIP;NOME;SETOR;SITUACAO;NASCIMENTO;(ALUNO: TURMA;PELOTAO;IDADE;PESO;NUM_PARENTE)(INSTRUTOR: ESPECIALIDADE;GRADUACAO)(FUNCIONARIO: CARGO)
+FUNCIONARIO;30010003;Ana Paula Moreira;Departamento de Saúde;ATIVO;1983-10-03;Enfermeira
+INSTRUTOR;10010002;Antônio Marcos Ribeiro;Seção de Ensino;ATIVO;1985-11-05;Marinharia;SO
+INSTRUTOR;10010001;Carlos Eduardo Menezes;Seção de Ensino;ATIVO;1988-05-20;Navegação;1SG
+INSTRUTOR;10010003;Fábio Henrique Lopes;Educação Física;ATIVO;1992-11-30;Treinamento físico;3SG
+ALUNO;20260006;Gabriel Mendes Pinto;Companhia de Alunos;DESLIGADO;2005-01-30;2025/B;2º;21;75.8;(88) 96666-0006
+ALUNO;20260005;João Victor Barbosa;Companhia de Alunos;ATIVO;2007-11-27;2026/B;3º;19;70.0;(85) 97777-0005
+FUNCIONARIO;30010002;José Raimundo Pereira;Rancho;ATIVO;1975-11-22;Cozinheiro
+ALUNO;20260001;Lucas Almeida Souza;Companhia de Alunos;ATIVO;2007-03-14;2026/A;1º;19;68.5;(85) 99999-0001
+FUNCIONARIO;30010001;Maria das Graças Oliveira;Secretaria;ATIVO;1979-06-12;Auxiliar administrativa
+ALUNO;20260003;Mateus Ferreira Rocha;Companhia de Alunos;AFASTADO;2007-07-02;2026/A;2º;19;65.2;(88) 98888-0003
+ALUNO;20260004;Pedro Henrique Nunes;Companhia de Alunos;ATIVO;2006-12-25;SIERRA 2026;3º;19;80.4;(85) 97777-0004
+ALUNO;20260002;Rafael Costa Lima;Companhia de Alunos;ATIVO;2006-11-18;2026/A;1º;20;72.0;(85) 99999-0002
+INSTRUTOR;10010004;Ricardo Souza Teixeira;Educação Física;AFASTADO;1990-02-08;Natação;2SG
+ALUNO;20260007;Thiago Araújo Cavalcante;Companhia de Alunos;ATIVO;2007-09-09;2026/B;2º;19;66.9;(85) 95555-0007
+ALUNO;26062445;Vinicius;Companhia de Alunos;ATIVO;;SIERRA 2026;3;20;90.0;88

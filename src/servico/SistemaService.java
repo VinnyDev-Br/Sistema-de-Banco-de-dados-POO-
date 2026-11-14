@@ -222,14 +222,23 @@ public class SistemaService {
     }
 
     public void registrarSaida() { log.registrar(usuario.getLogin(), "SAIDA", "Sistema encerrado"); }
-    
-    /** Turmas distintas dos alunos, em ordem alfabética (Alfa, Bravo, Charlie...). */
+
+    public static final List<String> TURMAS_OFICIAIS = List.of(
+            "ALFA 2008", "BRAVO 2009", "CHARLIE 2010", "DELTA 2011",
+            "ECHO 2012", "FOXTROT 2013", "GOLF 2014", "HOTEL 2015",
+            "INDIA 2016", "JULIET 2017", "KILO 2018", "LIMA 2019",
+            "MIKE 2020", "NOVEMBER 2021", "OSCAR 2022", "PAPA 2023",
+            "QUEBEC 2024", "ROMEO 2025", "SIERRA 2026", "TANGO 2027",
+            "UNIFORM 2028", "VICTOR 2029", "WHISKEY 2030", "X-RAY 2031",
+            "YANKEE 2032");
+
+    /** Turmas oficiais + as que já existem nos alunos, em ordem alfabética, sem repetir. */
     public List<String> turmas() {
-        return repo.listarTodos().stream()
-                .filter(p -> p instanceof Aluno)
-                .map(p -> ((Aluno) p).getTurma())
-                .distinct()
-                .sorted(Comparator.comparing(Texto::normalizar))
-                .collect(Collectors.toList());
+        Set<String> todas = new TreeSet<>(Comparator.comparing(Texto::normalizar));
+        todas.addAll(TURMAS_OFICIAIS);
+        for (Pessoa p : repo.listarTodos()) {
+            if (p instanceof Aluno) todas.add(((Aluno) p).getTurma());
+        }
+        return new ArrayList<>(todas);
     }
 }

@@ -59,6 +59,7 @@ public class TelaPrincipal extends JFrame {
             @Override public void windowClosing(WindowEvent e) { sair(); }
         });
         recarregarSetores();
+        recarregarTurmas();
         atualizarTabela();
         setSize(1050, 600);
         setLocationRelativeTo(null);
@@ -70,7 +71,7 @@ public class TelaPrincipal extends JFrame {
         p.add(new JLabel("Buscar (nome ou NIP):")); p.add(busca);
         p.add(new JLabel("Tipo:")); p.add(filtroTipo);
         p.add(new JLabel("Setor:")); p.add(filtroSetor);
-        p.add(new JLabel("Turma:")); p.add(filtroTurma);  
+        p.add(new JLabel("Turma:")); p.add(filtroTurma);
         p.add(new JLabel("Situação:")); p.add(filtroSituacao);
         JButton limpar = new JButton("Limpar filtros");
         limpar.addActionListener(e -> {

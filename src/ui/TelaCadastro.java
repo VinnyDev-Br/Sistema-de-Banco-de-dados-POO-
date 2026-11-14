@@ -14,20 +14,12 @@ public class TelaCadastro extends JDialog {
     private static final String[] TIPOS = {"Aluno", "Instrutor", "Funcionário"};
     private static final String[] CARTAS = {"ALUNO", "INSTRUTOR", "FUNCIONARIO"};
     private static final String[] GRADUACOES = {
-        // Praças
-        "AM", "GR", "MN", "CB", "3SG", "2SG", "1SG", "SO",
-        // Oficiais
-        "GM", "2T", "1T", "CT", "CC", "CF", "CMG", "CA", "VA", "AE"};
-    }  
-    private static final String[] TURMAS = {
-        "ALFA 2008", "BRAVO 2009", "CHARLIE 2010", "DELTA 2011",
-        "ECHO 2012", "FOXTROT 2013", "GOLF 2014", "HOTEL 2015",
-        "INDIA 2016", "JULIET 2017", "KILO 2018", "LIMA 2019",
-        "MIKE 2020", "NOVEMBER 2021", "OSCAR 2022", "PAPA 2023",
-        "QUEBEC 2024", "ROMEO 2025", "SIERRA 2026", "TANGO 2027",
-        "UNIFORM 2028", "VICTOR 2029", "WHISKEY 2030", "X-RAY 2031",
-        "YANKEE 2032"
-    };
+            // Praças
+            "AM", "GR", "MN", "CB", "3SG", "2SG", "1SG", "SO",
+            // Oficiais
+            "GM", "2T", "1T", "CT", "CC", "CF", "CMG", "CA", "VA", "AE"};
+
+    private static final String[] TURMAS = SistemaService.TURMAS_OFICIAIS.toArray(new String[0]);
     private final SistemaService servico;
     private final Pessoa existente;
     private boolean salvou = false;
@@ -40,7 +32,7 @@ public class TelaCadastro extends JDialog {
     private final JTextField nascimento = new JTextField(10);
 
     private final JTextField pelotao = new JTextField(12),
-        idade = new JTextField(5), peso = new JTextField(6), parente = new JTextField(14);
+            idade = new JTextField(5), peso = new JTextField(6), parente = new JTextField(14);
     private final JComboBox<String> turma = new JComboBox<>(TURMAS);
     private final JTextField especialidade = new JTextField(18);
     private final JComboBox<String> graduacao = new JComboBox<>(GRADUACOES);
@@ -92,7 +84,8 @@ public class TelaCadastro extends JDialog {
         ok.addActionListener(e -> salvar());
         cancelar.addActionListener(e -> dispose());
         JPanel botoes = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        botoes.add(ok); botoes.add(cancelar);
+        botoes.add(ok);
+        botoes.add(cancelar);
         getRootPane().setDefaultButton(ok);
 
         JPanel centro = new JPanel(new BorderLayout());
@@ -120,18 +113,23 @@ public class TelaCadastro extends JDialog {
         if (p.getDataNascimento() != null) nascimento.setText(p.getDataNascimento().format(Campos.DATA));
         if (p instanceof Aluno) {
             Aluno a = (Aluno) p;
-            turma.setSelectedItem(a.getTurma()); pelotao.setText(a.getPelotao());
-            idade.setText(String.valueOf(a.getIdade())); peso.setText(String.valueOf(a.getPeso()).replace('.', ','));
+            turma.setSelectedItem(a.getTurma());
+            pelotao.setText(a.getPelotao());
+            idade.setText(String.valueOf(a.getIdade()));
+            peso.setText(String.valueOf(a.getPeso()).replace('.', ','));
             parente.setText(a.getNumeroParentesco());
         } else if (p instanceof Instrutor) {
             Instrutor i = (Instrutor) p;
-            especialidade.setText(i.getEspecialidade()); graduacao.setSelectedItem(i.getGraduacao());
+            especialidade.setText(i.getEspecialidade());
+            graduacao.setSelectedItem(i.getGraduacao());
         } else {
             cargo.setText(((Funcionario) p).getCargo());
         }
     }
 
-    /** Monta um objeto novo (valida tudo no construtor) e entrega ao serviço. */
+    /**
+     * Monta um objeto novo (valida tudo no construtor) e entrega ao serviço.
+     */
     private void salvar() {
         try {
             int numero = Campos.inteiro(nip, "NIP");
@@ -145,7 +143,7 @@ public class TelaCadastro extends JDialog {
             switch (tipo.getSelectedIndex()) {
                 case 0:
                     p = new Aluno(numero, nomeTxt, setorTxt, sit, nasc, turmaSel, pelotao.getText(),
-                    Campos.inteiro(idade, "Idade"), Campos.decimal(peso, "Peso"), parente.getText());
+                            Campos.inteiro(idade, "Idade"), Campos.decimal(peso, "Peso"), parente.getText());
                     break;
                 case 1:
                     Object g = graduacao.getSelectedItem();
@@ -154,7 +152,8 @@ public class TelaCadastro extends JDialog {
                 default:
                     p = new Funcionario(numero, nomeTxt, setorTxt, sit, nasc, cargo.getText());
             }
-            if (existente == null) servico.cadastrar(p); else servico.atualizar(p);
+            if (existente == null) servico.cadastrar(p);
+            else servico.atualizar(p);
             salvou = true;
             dispose();
         } catch (SistemaException ex) {                 // DadoInvalido, MatriculaDuplicada, Armazenamento...
@@ -162,5 +161,7 @@ public class TelaCadastro extends JDialog {
         }
     }
 
-    public boolean salvou() { return salvou; }
+    public boolean salvou() {
+        return salvou;
+    }
 }

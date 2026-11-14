@@ -3,3 +3,38 @@
 2026-11-12 17:31:08 | admin | SAIDA | Sistema encerrado
 2026-11-13 17:27:14 | admin | LOGIN | Perfil ADMIN, 14 registros
 2026-11-13 21:14:03 | admin | LOGIN | Perfil ADMIN, 14 registros
+2026-11-13 21:14:52 | admin | BACKUP | 20261113_211452
+2026-11-13 21:14:52 | admin | SAIDA | Sistema encerrado
+2026-11-13 21:15:06 | admin | LOGIN | Perfil ADMIN, 14 registros
+2026-11-13 21:15:40 | admin | LOGIN | Perfil ADMIN, 14 registros
+2026-11-13 21:16:33 | admin | BACKUP | 20261113_211633
+2026-11-13 21:16:33 | admin | CADASTRO | NIP 26062445 - Vinicius
+2026-11-13 21:53:11 | admin | LOGIN | Perfil ADMIN, 15 registros
+2026-11-13 21:54:02 | admin | BACKUP | 20261113_215402
+2026-11-13 21:54:02 | admin | EDICAO | NIP 20260004 - Pedro Henrique Nunes
+2026-11-13 21:58:19 | admin | LOGIN | Perfil ADMIN, 15 registros
+2026-11-13 21:58:25 | admin | BACKUP | 20261113_215825
+2026-11-13 21:58:25 | admin | SAIDA | Sistema encerrado
+2026-11-13 21:58:47 | admin | LOGIN | Perfil ADMIN, 15 registros
+2026-11-13 22:00:28 | admin | BACKUP | 20261113_220028
+2026-11-13 22:00:28 | admin | SAIDA | Sistema encerrado
+2026-11-13 22:01:33 | admin | LOGIN | Perfil ADMIN, 15 registros
+2026-11-13 22:03:46 | admin | LOGIN | Perfil ADMIN, 15 registros
+2026-11-13 22:05:35 | admin | BACKUP | 20261113_220535
+2026-11-13 22:05:35 | admin | EXCLUSAO | NIP 10010004 - Ricardo Souza Teixeira
+2026-11-13 22:05:39 | admin | EXCLUSAO | NIP 30010003 - Ana Paula Moreira
+2026-11-13 22:05:41 | admin | EXCLUSAO | NIP 10010002 - Antônio Marcos Ribeiro
+2026-11-13 22:05:43 | admin | EXCLUSAO | NIP 10010001 - Carlos Eduardo Menezes
+2026-11-13 22:05:46 | admin | EXCLUSAO | NIP 10010003 - Fábio Henrique Lopes
+2026-11-13 22:05:48 | admin | EXCLUSAO | NIP 20260006 - Gabriel Mendes Pinto
+2026-11-13 22:05:50 | admin | EXCLUSAO | NIP 20260005 - João Victor Barbosa
+2026-11-13 22:05:52 | admin | EXCLUSAO | NIP 30010002 - José Raimundo Pereira
+2026-11-13 22:05:55 | admin | EXCLUSAO | NIP 20260001 - Lucas Almeida Souza
+2026-11-13 22:05:57 | admin | EXCLUSAO | NIP 30010001 - Maria das Graças Oliveira
+2026-11-13 22:06:01 | admin | EXCLUSAO | NIP 20260003 - Mateus Ferreira Rocha
+2026-11-13 22:06:04 | admin | EXCLUSAO | NIP 20260007 - Thiago Araújo Cavalcante
+2026-11-13 22:06:08 | admin | EXCLUSAO | NIP 20260002 - Rafael Costa Lima
+2026-11-13 22:07:07 | admin | SAIDA | Sistema encerrado
+2026-11-13 22:16:01 | admin | LOGIN | Perfil ADMIN, 2 registros
+2026-11-13 22:22:02 | admin | BACKUP | 20261113_222202
+2026-11-13 22:22:02 | admin | SAIDA | Sistema encerrado
