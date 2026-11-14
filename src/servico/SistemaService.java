@@ -74,16 +74,21 @@ public class SistemaService {
                 .sorted(Comparator.comparing(Texto::normalizar)).collect(Collectors.toList());
     }
 
-    /** Filtros combinados: tipo, setor, situação e texto (nome ou NIP). Parâmetro null = sem filtro. */
-    public List<Pessoa> filtrar(String tipo, String setor, Situacao situacao, String texto) {
+    public List<Pessoa> filtrar(String tipo, String setor, String turma, Situacao situacao, String texto) {
         String chave = Texto.normalizar(texto);
         return repo.listarTodos().stream()
                 .filter(p -> tipo == null || p.getTipo().equals(tipo))
                 .filter(p -> setor == null || p.getSetor().equals(setor))
+                .filter(p -> turma == null || (p instanceof Aluno && ((Aluno) p).getTurma().equals(turma)))
                 .filter(p -> situacao == null || p.getSituacao() == situacao)
                 .filter(p -> chave.isEmpty() || Texto.normalizar(p.getNome()).contains(chave)
                         || String.valueOf(p.getNip()).contains(chave))
                 .collect(Collectors.toList());
+    }
+
+    
+    public List<Pessoa> filtrar(String tipo, String setor, Situacao situacao, String texto) {
+        return filtrar(tipo, setor, null, situacao, texto);
     }
 
     // ---------------- alterações (só ADMIN) ----------------

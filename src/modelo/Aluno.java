@@ -29,7 +29,7 @@ public class Aluno extends Pessoa {
             throw e;
         }
     }
-
+    
     public String getTurma() { return turma; }
     public void setTurma(String turma) throws DadoInvalidoException { this.turma = exigirTexto(turma, "Turma", 30); }
 
@@ -56,6 +56,9 @@ public class Aluno extends Pessoa {
         this.numeroParentesco = n;
     }
 
+    public void setTurma(String turma) throws DadoInvalidoException {
+        this.turma = exigirTexto(turma, "Turma", 30).toUpperCase().replaceAll("\\s+", " ");
+    }
     @Override public String getTipo() { return "ALUNO"; }
 
     @Override public String getDescricao() {

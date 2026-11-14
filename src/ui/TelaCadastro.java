@@ -13,8 +13,21 @@ import java.time.LocalDate;
 public class TelaCadastro extends JDialog {
     private static final String[] TIPOS = {"Aluno", "Instrutor", "Funcionário"};
     private static final String[] CARTAS = {"ALUNO", "INSTRUTOR", "FUNCIONARIO"};
-    private static final String[] GRADUACOES = {"3SG", "2SG", "1SG", "SO"};
-
+    private static final String[] GRADUACOES = {
+        // Praças
+        "AM", "GR", "MN", "CB", "3SG", "2SG", "1SG", "SO",
+        // Oficiais
+        "GM", "2T", "1T", "CT", "CC", "CF", "CMG", "CA", "VA", "AE"};
+    }  
+    private static final String[] TURMAS = {
+        "ALFA 2008", "BRAVO 2009", "CHARLIE 2010", "DELTA 2011",
+        "ECHO 2012", "FOXTROT 2013", "GOLF 2014", "HOTEL 2015",
+        "INDIA 2016", "JULIET 2017", "KILO 2018", "LIMA 2019",
+        "MIKE 2020", "NOVEMBER 2021", "OSCAR 2022", "PAPA 2023",
+        "QUEBEC 2024", "ROMEO 2025", "SIERRA 2026", "TANGO 2027",
+        "UNIFORM 2028", "VICTOR 2029", "WHISKEY 2030", "X-RAY 2031",
+        "YANKEE 2032"
+    };
     private final SistemaService servico;
     private final Pessoa existente;
     private boolean salvou = false;
@@ -26,8 +39,9 @@ public class TelaCadastro extends JDialog {
     private final JComboBox<Situacao> situacao = new JComboBox<>(Situacao.values());
     private final JTextField nascimento = new JTextField(10);
 
-    private final JTextField turma = new JTextField(12), pelotao = new JTextField(12),
-            idade = new JTextField(5), peso = new JTextField(6), parente = new JTextField(14);
+    private final JTextField pelotao = new JTextField(12),
+        idade = new JTextField(5), peso = new JTextField(6), parente = new JTextField(14);
+    private final JComboBox<String> turma = new JComboBox<>(TURMAS);
     private final JTextField especialidade = new JTextField(18);
     private final JComboBox<String> graduacao = new JComboBox<>(GRADUACOES);
     private final JTextField cargo = new JTextField(18);
@@ -43,7 +57,7 @@ public class TelaCadastro extends JDialog {
         setor.setEditable(true);
         for (String s : servico.setores()) setor.addItem(s);
         graduacao.setEditable(true);
-
+        turma.setEditable(true);
         JPanel comum = new JPanel(new GridBagLayout());
         Campos.linha(comum, 0, "Tipo:", tipo);
         Campos.linha(comum, 1, "NIP:", nip);
@@ -106,7 +120,7 @@ public class TelaCadastro extends JDialog {
         if (p.getDataNascimento() != null) nascimento.setText(p.getDataNascimento().format(Campos.DATA));
         if (p instanceof Aluno) {
             Aluno a = (Aluno) p;
-            turma.setText(a.getTurma()); pelotao.setText(a.getPelotao());
+            turma.setSelectedItem(a.getTurma()); pelotao.setText(a.getPelotao());
             idade.setText(String.valueOf(a.getIdade())); peso.setText(String.valueOf(a.getPeso()).replace('.', ','));
             parente.setText(a.getNumeroParentesco());
         } else if (p instanceof Instrutor) {
@@ -126,12 +140,12 @@ public class TelaCadastro extends JDialog {
             String setorTxt = s == null ? "" : s.toString();
             Situacao sit = (Situacao) situacao.getSelectedItem();
             LocalDate nasc = Campos.data(nascimento, "Nascimento", false);
-
+            String turmaSel = turma.getSelectedItem() == null ? "" : turma.getSelectedItem().toString();
             Pessoa p;
             switch (tipo.getSelectedIndex()) {
                 case 0:
-                    p = new Aluno(numero, nomeTxt, setorTxt, sit, nasc, turma.getText(), pelotao.getText(),
-                            Campos.inteiro(idade, "Idade"), Campos.decimal(peso, "Peso"), parente.getText());
+                    p = new Aluno(numero, nomeTxt, setorTxt, sit, nasc, turmaSel, pelotao.getText(),
+                    Campos.inteiro(idade, "Idade"), Campos.decimal(peso, "Peso"), parente.getText());
                     break;
                 case 1:
                     Object g = graduacao.getSelectedItem();
